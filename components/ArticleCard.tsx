@@ -3,23 +3,13 @@ import { Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
-
-type ArticleCardType = {
-  _createdAt: string;
-  views: number;
-  author: { _id: number; name: string };
-  _id: number;
-  description: string;
-  image: string;
-  category: string;
-  title: string;
-};
+import { ArticleCardType } from "./ArticlesList";
 
 export const ArticleCard = ({ post }: { post: ArticleCardType }) => {
   const {
     _createdAt,
     views,
-    author: { _id: authorId, name },
+    author: { _id: authorId, name, image: authorImage, bio },
     _id,
     description,
     image,
@@ -48,7 +38,8 @@ export const ArticleCard = ({ post }: { post: ArticleCardType }) => {
 
         <Link href={`/user/${authorId}`}>
           <Image
-            src="https://placehold.co/48x48"
+            // src="https://placehold.co/48x48"
+            src={authorImage}
             alt="placeholder"
             width={48}
             height={48}

@@ -3,9 +3,7 @@ import { SearchFormReset } from "./index";
 import { SearchIcon } from "lucide-react";
 // import { buttonVariants, Button } from "@/components/ui/button";
 
-
 export const SearchForm = ({ query }: { query?: string }) => {
-  console.log("query:", query);
   return (
     <Form action="/" scroll={false} className="search-form">
       <input
