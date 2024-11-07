@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer utilities {
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
   .heading {
     @apply uppercase bg-slate-700 px-6 py-3 text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
   }
@@ -25,6 +29,26 @@
 
   .search-btn {
     @apply size-[50px] rounded-full bg-slate-400 text-white  flex justify-center items-center !important;
+  }
+
+  .section_container {
+    @apply px-6 py-10 max-w-7xl mx-auto;
+  }
+
+  .card_grid {
+    @apply grid  sm:grid-cols-2 md:grid-cols-3 gap-5;
+  }
+
+  .article-card {
+    @apply bg-white border-[5px] border-slate-500 py-6 px-5 rounded-[22px]  hover:border-primary transition-all duration-500  shadow-md hover:shadow-2xl hover:bg-slate-200;
+  }
+
+  .article-card_description {
+    @apply font-normal text-[16px] line-clamp-2 my-3  break-all;
+  }
+
+  .article-card_image {
+    @apply w-full h-[164px] rounded-[10px] object-cover;
   }
 }
 

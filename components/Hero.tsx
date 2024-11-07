@@ -2,6 +2,7 @@ import { SearchForm } from "./index";
 
 export const Hero = async ({ query }: { query?: string }) => {
   return (
+    // rename section classname in globals.css
     <section className="slate_container">
       <h1 className="heading">Heading</h1>
       <p className="sub-heading">

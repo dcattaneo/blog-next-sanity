@@ -1,4 +1,4 @@
-import { Hero } from "@/components/index";
+import { ArticlesList, Hero } from "@/components/index";
 
 export default async function Home({
   searchParams,
@@ -10,6 +10,7 @@ export default async function Home({
   return (
     <>
       <Hero query={query} />
+      <ArticlesList query={query} />
     </>
   );
 }
