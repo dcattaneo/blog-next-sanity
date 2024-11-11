@@ -19,7 +19,7 @@ export const ArticlesList = ({
   query?: string;
   posts: ArticleCardType[];
 }) => {
-  console.log("ArticlesListPosts", posts);
+  // console.log("ArticlesListPosts", posts);
   return (
     <>
       <section className="section_container bg-red-200">

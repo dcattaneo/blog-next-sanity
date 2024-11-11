@@ -4,4 +4,17 @@ import { SearchForm } from "./SearchForm";
 import { SearchFormReset } from "./SearchFormReset";
 import { ArticlesList } from "./ArticlesList";
 import { ArticleCard } from "./ArticleCard";
-export { Navbar, Hero, SearchForm, SearchFormReset, ArticlesList, ArticleCard };
+import { View } from "./View";
+import { LiveIndicator } from "./LiveIndicator";
+import { ArticleForm } from "./ArticleForm";
+export {
+  Navbar,
+  Hero,
+  SearchForm,
+  SearchFormReset,
+  ArticlesList,
+  ArticleCard,
+  View,
+  LiveIndicator,
+  ArticleForm,
+};
