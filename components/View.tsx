@@ -5,7 +5,7 @@ import { writeClient } from "@/sanity/lib/write-client";
 import { unstable_after as after } from "next/server";
 
 type articleViewsType = {
-  views?: number;
+  views?: number | undefined;
 };
 
 export const View = async ({ id }: { id: string }) => {
@@ -21,7 +21,7 @@ export const View = async ({ id }: { id: string }) => {
     async () =>
       await writeClient
         .patch(id)
-        .set({ views: articleViews && articleViews + 1 })
+        .set({ views: articleViews! + 1 })
         .commit()
   );
 
@@ -32,7 +32,7 @@ export const View = async ({ id }: { id: string }) => {
       </div>
 
       <p className="view-text ">
-        <span className="text-white">{`${articleViews} ${view(articleViews)} `}</span>
+        <span className="text-white">{`${articleViews}  ${view(articleViews)} `}</span>
       </p>
     </div>
   );

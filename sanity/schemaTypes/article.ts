@@ -25,6 +25,7 @@ export const article = defineType({
     defineField({
       name: "views",
       type: "number",
+      initialValue: 1,
     }),
     defineField({
       name: "description",

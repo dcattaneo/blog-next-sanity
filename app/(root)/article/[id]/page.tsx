@@ -1,15 +1,19 @@
 import { Suspense } from "react";
 import { formatDate } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
-import { ARTICLE_BY_ID_QUERY } from "@/sanity/lib/queries";
+import {
+  ARTICLE_BY_ID_QUERY,
+  RELATED_ARTICLES_BY_SLUG,
+} from "@/sanity/lib/queries";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import markdownit from "markdown-it";
 import { Skeleton } from "@/components/ui/skeleton";
-import { View } from "@/components/index";
+import { ArticleCard, View } from "@/components/index";
+import { ArticleCardType } from "@/components/ArticlesList";
 
-// export const experimental_ppr = true;
+export const experimental_ppr = true;
 
 export type ArticlePageType = {
   title: string;
@@ -31,19 +35,48 @@ export type ArticlePageType = {
 
 const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const articleData: ArticlePageType = await client.fetch(ARTICLE_BY_ID_QUERY, {
-    id,
-  });
+
+  // ----Sequential data fetching (articleData as independent one)----
+
+  // const articleData: ArticlePageType = await client.fetch(ARTICLE_BY_ID_QUERY, {
+  //   id,
+  // });
   // console.log("articleData:", articleData);
 
+  // ----Sequential data fetching (relatedArticles as independent one)----
+
+  // const { select: relatedArticles } = await client.fetch(
+  //   RELATED_ARTICLES_BY_SLUG,
+  //   { slug: "related-articles" }
+  // );
+
+  // console.log("relatedArticles:", relatedArticles);
+
+  //---- Parallel data fetching (both articleData and relatedArticles)----
+
+  const [articleData, { select: relatedArticles }] = await Promise.all([
+    client.fetch<ArticlePageType>(ARTICLE_BY_ID_QUERY, {
+      id,
+    }),
+    client.fetch(RELATED_ARTICLES_BY_SLUG, { slug: "related-articles" }),
+  ]);
+
+  console.log("articleData:", articleData);
+  console.log("relatedArticles:", relatedArticles);
+
   if (!articleData) return notFound();
+
+  const filteredRelatedArticles = relatedArticles?.filter(
+    (article: ArticleCardType) => article._id !== articleData._id
+  );
+
   const {
     title,
     category,
     post,
     image,
     description,
-    views,
+    // views,
     _createdAt,
     _id,
     author: {
@@ -59,29 +92,31 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const parsedMarkdown = markdown.render(post) || "";
   return (
     <>
-      <section className="section_container bg-red-200 !min-h-[230px]">
+      <section className="section_container bg-slate-500 !min-h-[230px]   ">
         <p className="tag flex items-center justify-center">
           {formatDate(_createdAt)}
         </p>
-        <h1 className="heading">{title}</h1>
-        <p className="sub-heading !max-w-5xl">{description}</p>
+        <div className="flex flex-col justify-center items-center  max-w-7xl ">
+          <h1 className="heading overflow-hidden">{title}</h1>
+          <p className="sub-heading !max-w-4xl">{description}</p>
+        </div>
       </section>
 
-      <section className="section_container">
+      <section className="sub-section_container ">
         <img
           src={image}
           alt="articleImage"
           className="w-full h-auto rounded-xl"
         />
 
-        <div className="space-y-5 mt-10 max-w-4xl mx-auto bg-red-200">
+        <div className="space-y-5  mt-10 max-w-4xl mx-auto">
           <div className="flex justify-between items-center ">
             <Link
               href={`/user/${authorId}`}
               className="flex gap-2 items-center mb-3"
             >
               <Image
-                src={image}
+                src={authorImage}
                 alt="avatarImage"
                 width={64}
                 height={64}
@@ -92,6 +127,7 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
                   {authorName}
                 </p>
                 <p>@{authorUsername}</p>
+                <p className="text-sm"> {authorBio}</p>
               </div>
             </Link>
             <p className="category-tag">{category}</p>
@@ -105,15 +141,25 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           )}
         </div>
 
-        <hr className="divider" />
+        <hr className="divider " />
 
-        {/* Selected Articles */}
+        {/* Related Articles */}
+        {filteredRelatedArticles?.length > 0 && (
+          <div className="max-w-4xl mx-auto ">
+            <p className="font-semibold text-[20px]">Related Articles</p>
+            <ul className="mt-7 card_grid-sm">
+              {filteredRelatedArticles.map((article: ArticleCardType) => (
+                <ArticleCard key={article._id} post={article} />
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* dynamic section */}
+        <Suspense fallback={<Skeleton className="view_skeleton" />}>
+          <View id={_id} />
+        </Suspense>
       </section>
-
-      {/* dynamic section */}
-      <Suspense fallback={<Skeleton className="view_skeleton" />}>
-        <View id={_id} />
-      </Suspense>
     </>
   );
 };
