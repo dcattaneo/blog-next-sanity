@@ -14,18 +14,13 @@ export default async function Home({
 
   // const session = await auth();
 
-  // console.log("sessionId:", session?.id);
-
   // OPTION 1: --- ARTICLES_QUERY FROM SANITY_QUERIES ---
   // const posts = await client.fetch(ARTICLES_QUERY, params);
 
-  // console.log("Sanity-Posts", posts);
-
-  // OPTION 2: --- FETCH DIRECTLY FROM SANITY, REVALIDATING THE PAGE WHENEVER NEW CHANGES ARE MADE ---
+  // OPTION 2(current): --- FETCH DIRECTLY FROM SANITY, REVALIDATING THE PAGE WHENEVER NEW CHANGES ARE MADE ---
 
   const { data: posts } = await sanityFetch({ query: ARTICLES_QUERY, params });
 
-  // console.log("Sanity-FETCH", posts);
   return (
     <>
       <Hero query={query} />

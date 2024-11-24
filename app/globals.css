@@ -3,41 +3,116 @@
 @tailwind utilities;
 
 @layer utilities {
+  .text-gradient {
+    background: linear-gradient(180deg, #555, #000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback for unsupported browsers */
+  }
+
+  .text-gradient-dark {
+    background: linear-gradient(180deg, #fff, #999);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback for unsupported browsers */
+  }
+
+  .hr {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .border-wrapper-dark {
+    border-color: hsl(0, 0%, 18%);
+  }
+
+  .bg-button-dark {
+    background-color: hsl(0, 0%, 16%);
+    color: hsl(0, 0%, 93%);
+    opacity: 1;
+  }
+
+  .bg-custom-dark {
+    background-color: hsl(0, 0%, 9%);
+    color: #fff;
+  }
+
+  .bg-custom-light {
+    background-color: rgb(250, 250, 250);
+    color: hsl(0, 0%, 9%);
+    border: 1px solid #00000014;
+  }
+
+  .text-custom-light {
+    color: hsl(0, 0%, 9%);
+  }
+
+  .text-custom-dark {
+    color: #fff;
+  }
+
+  .card-custom-light {
+    background-color: rgb(250, 250, 250);
+    color: hsl(0, 0%, 9%);
+    border: 1px solid #00000014;
+  }
+
+  .card-custom-dark {
+    background-color: #030303;
+    border: 1px solid #333;
+    color: #999;
+  }
+
+  .button-dark {
+    @apply bg-custom-dark hover:opacity-85;
+  }
+
+  .button-light {
+    @apply bg-custom-light  shadow-none hover:bg-[#00000014];
+  }
+
   .flex-between {
     @apply flex justify-between items-center;
   }
   .tag {
-    @apply bg-secondary px-6 py-3 font-bold rounded-sm uppercase relative tag-tri;
+    @apply bg-custom-light px-6 py-3 font-bold rounded-sm uppercase relative tag-tri mt-8;
   }
   .tag-tri {
-    @apply before:content-[''] before:absolute before:top-2 before:left-2 before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-slate-500 after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-l-slate-500;
+    @apply before:content-[''] before:absolute before:top-2 before:left-2 before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-[#666] after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-[#666];
   }
 
   .category-tag {
-    @apply font-medium text-[16px] bg-primary text-white px-4 py-2 rounded-full;
+    @apply font-medium text-xs sm:text-sm  lg:text-base bg-custom-dark  px-4 py-2 rounded-full;
   }
   .heading {
-    @apply uppercase bg-slate-700 px-6 py-3 rounded-xl  text-white sm:text-[54px]  sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+    @apply px-6 py-3 rounded-xl  text-white sm:text-[54px]  sm:leading-[64px] text-[40px] leading-[46px] max-w-5xl text-center my-5;
   }
 
   .sub-heading {
-    @apply font-medium text-[20px]  py-2 px-2 text-white max-w-2xl text-center break-words;
+    @apply font-medium text-[20px]    py-2 px-2  text-[#666] max-w-2xl text-center break-words;
   }
 
   .hero_container {
-    @apply w-full bg-slate-500 min-h-[530px]  flex justify-center items-center flex-col py-10 px-6;
+    @apply w-full bg-[rgb(250,250,250)] dark:bg-black min-h-[530px]  flex justify-center items-center flex-col py-10 px-6;
+  }
+
+  .not_found_container {
+    @apply flex flex-col items-center justify-center h-screen text-center;
   }
 
   .search-form {
-    @apply max-w-3xl w-full min-h-[50px] bg-white  border-none rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
+    @apply max-w-3xl w-full min-h-[50px] border outline-none border-[#00000014] dark:border-[#ffffff24]  rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
   }
 
   .search-input {
-    @apply flex-1  placeholder:font-semibold w-full h-auto outline-none;
+    @apply flex-1  placeholder:font-semibold w-full h-auto outline-none bg-inherit text-gray-700 dark:text-[#999] text-base md:text-lg;
   }
 
   .search-btn {
-    @apply size-[50px] rounded-full bg-slate-700 text-white  flex justify-center items-center !important;
+    @apply size-[40px] md:size-[50px] hover:opacity-85 rounded-full bg-custom-dark  flex justify-center items-center !important;
   }
 
   .section_container {
@@ -45,7 +120,7 @@
   }
 
   .sub-section_container {
-    @apply px-6 py-10 max-w-5xl mx-auto;
+    @apply px-6 py-10   max-w-5xl mx-auto dark:text-[#888];
   }
 
   .card_grid {
@@ -57,11 +132,11 @@
   }
 
   .article-card {
-    @apply bg-white border-[1px] border-slate-100 py-6 px-5 rounded-[22px]  hover:border-primary transition-all duration-300  shadow-md hover:shadow-2xl  hover:bg-slate-100;
+    @apply card-custom-light dark:card-custom-dark  border-[1px]  py-6 px-5 rounded-[22px]     shadow-md hover:shadow-2xl  hover:bg-[#fff] dark:hover:bg-[#111];
   }
 
   .article-card_description {
-    @apply font-normal text-[16px] line-clamp-2 my-3  break-all;
+    @apply font-normal text-[16px] line-clamp-1   my-3  break-all;
   }
 
   .article-card_image {
@@ -69,54 +144,54 @@
   }
 
   .profile-card {
-    @apply flex flex-col items-center justify-center gap-2 bg-slate-100 rounded-md mt-4 w-[300px] py-6 mb-10 border-none   px-5 shadow-md hover:shadow-xl  hover:bg-slate-200;
+    @apply flex flex-col items-center justify-center gap-2 bg-[#00000014] rounded-md mt-4 w-[300px] py-6 mb-10 border-none   px-5 shadow-md  hover:bg-[#00000014] dark:card-custom-dark;
   }
 
   .divider {
-    @apply border-dotted bg-zinc-400  max-w-4xl my-10 mx-auto;
+    @apply h-px  bg-gray-200 border-0 dark:bg-[#ffffff24]     max-w-4xl my-10 mx-auto;
   }
 
   .view_skeleton {
-    @apply bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3;
+    @apply bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-16 right-3;
   }
 
   .view-container {
-    @apply flex justify-end items-center mt-5 fixed bottom-3 right-3;
+    @apply flex justify-end items-center mt-5 fixed bottom-16  right-3;
   }
 
   .view-text {
-    @apply font-medium text-[16px] bg-primary px-4 py-2 rounded-lg capitalize;
+    @apply font-medium  text-[12px] sm:text-[16px] bg-custom-dark px-4 py-2 rounded-lg capitalize;
   }
 
   .article-form {
-    @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;
+    @apply max-w-2xl mx-auto  my-10 space-y-8 px-6;
   }
   .article-form_label {
-    @apply font-semibold text-[18px] text-black uppercase;
+    @apply font-bold  text-[16px] md:text-[18px] dark:text-[#888];
   }
 
   .article-form_input {
-    @apply border-[1px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-3xl mt-3 placeholder:text-slate-300 ring-0  !important;
+    @apply border-[1px] border-black ring-0 outline-none  dark:border-[#ffffff24] dark:bg-black  dark:text-[#999] dark:placeholder:text-[#444] px-5 py-7 text-[16px] md:text-[18px] text-black font-semibold rounded-3xl mt-3 placeholder:text-slate-300 dark:focus:border-[#ffffff24] focus:outline-none dark:focus:outline-none !important;
   }
 
   .article-form_textarea {
-    @apply border-[1px] border-black p-5 text-[18px] text-black font-semibold rounded-3xl resize-none mt-3 placeholder:text-slate-300 ring-0 !important;
+    @apply border-[1px] border-black p-5 text-[16px] md:text-[18px] text-black font-semibold rounded-3xl resize-none mt-3 placeholder:text-slate-300 ring-0 dark:border-[#ffffff24] dark:bg-black  dark:text-[#999] dark:placeholder:text-[#444] dark:focus:border-[#ffffff24] !important;
   }
 
   .article-form_error {
-    @apply text-red-500 mt-2 ml-5;
+    @apply text-red-500 mt-2 ml-5 text-[12px] md:text-[14px];
   }
 
   .article-form_no_error {
-    @apply text-green-700 mt-2 ml-5;
+    @apply text-green-700 mt-2 ml-5 text-[12px] md:text-[14px];
   }
 
   .article-form_editor {
-    @apply mt-3 border-[3px] border-black text-[18px] text-black font-semibold placeholder:text-slate-300  !important;
+    @apply mt-3 border-[3px] border-black text-[16px] md:text-[18px] text-black font-semibold placeholder:text-slate-300  !important;
   }
 
   .article-form_btn {
-    @apply p-5 min-h-[70px] w-full font-bold text-[18px] !important;
+    @apply transition duration-100 p-5 min-h-[60px] w-full font-bold text-[16px] md:text-[18px] !important;
   }
 }
 

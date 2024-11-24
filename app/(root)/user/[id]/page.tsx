@@ -21,12 +21,10 @@ export const experimental_ppr = true;
 
 const UserProfile = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  console.log("ParamsId:", id);
+
   const session = await auth();
-  console.log("sessionId:", session?.id);
 
   const user: UserProfileType = await client.fetch(AUTHOR_ID_QUERY, { id });
-  console.log("user:", user);
 
   if (!user) return notFound();
 
@@ -34,10 +32,12 @@ const UserProfile = async ({ params }: { params: Promise<{ id: string }> }) => {
     <>
       <section className="section_container">
         {/* Profile Card Wrapper */}
-        <div className="flex  justify-center sm:justify-start mb-10 ">
-          <div className="profile-card text-center ">
+        <div className="flex  justify-center sm:justify-start mb-10 mt-4 ">
+          <div className="profile-card text-center dark:hover:bg-[#111]">
             <div className="title">
-              <h3 className="text-lg line-clamp-1 font-bold">{user.name}</h3>
+              <h3 className="text-lg line-clamp-1 font-bold dark:text-[#eaeaea]">
+                {user.name}
+              </h3>
             </div>
             <Image
               src={user.image}
@@ -48,7 +48,10 @@ const UserProfile = async ({ params }: { params: Promise<{ id: string }> }) => {
             />
             <p className="italic">
               {" "}
-              <span className="font-semibold text-black"> @</span>
+              <span className="font-semibold text-black dark:text-[#999]">
+                {" "}
+                @
+              </span>
               {user.username}
             </p>
             <p className="italic"> {user.bio} </p>
@@ -56,14 +59,14 @@ const UserProfile = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
         {/* Articles details */}
         <div className="flex flex-1 flex-col gap-5  ">
-          <p className="font-bold text-[20px] sm:text-2xl text-center sm:text-start">
+          <p className="font-bold text-[20px] sm:text-2xl text-center sm:text-start dark:text-gradient-dark">
             {session?.id === user._id ? "Your" : "All"} Articles
           </p>
 
           <ul className="card_grid-sm">
             {/* ppr - Suspense */}
             <Suspense fallback={<ArticleCardSkeleton />}>
-              {/* Add User Articles */}
+              {/*  User Articles */}
               <UserArticles id={id} />
             </Suspense>
           </ul>

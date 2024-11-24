@@ -32,7 +32,7 @@ export const View = async ({ id }: { id: string }) => {
       </div>
 
       <p className="view-text ">
-        <span className="text-white">{`${articleViews}  ${view(articleViews)} `}</span>
+        <span>{`${articleViews}  ${view(articleViews)} `}</span>
       </p>
     </div>
   );

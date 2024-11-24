@@ -6,8 +6,6 @@ import { ArticleCard } from "@/components/index";
 export const UserArticles = async ({ id }: { id: string }) => {
   const articles = await client.fetch(ARTICLES_BY_AUTHOR_QUERY, { id });
 
-  console.log("userArticles:", articles);
-
   return (
     <>
       {articles.length > 0 ? (

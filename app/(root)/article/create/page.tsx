@@ -8,8 +8,10 @@ const CreateArticlePage = async () => {
   if (!session) redirect("/");
   return (
     <>
-      <section className="section_container !min-h-[230px] bg-slate-500 flex flex-col justify-center items-center">
-        <h1 className="heading">Create your Article</h1>
+      <section className="section_container !min-h-[230px]  flex flex-col justify-center items-center">
+        <h1 className="heading text-gradient text-4xl font-bold dark:text-gradient-dark">
+          Create your Article
+        </h1>
       </section>
       <ArticleForm />
     </>

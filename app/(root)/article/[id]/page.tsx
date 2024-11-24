@@ -50,19 +50,16 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   //   { slug: "related-articles" }
   // );
 
-  // console.log("relatedArticles:", relatedArticles);
+  // console.log("relatedArticlesData:", relatedArticles);
 
-  //---- Parallel data fetching (both articleData and relatedArticles)----
+  //---- Parallel data fetching (current) [both articleData and relatedArticlesData]----
 
   const [articleData, { select: relatedArticles }] = await Promise.all([
     client.fetch<ArticlePageType>(ARTICLE_BY_ID_QUERY, {
       id,
     }),
-    client.fetch(RELATED_ARTICLES_BY_SLUG, { slug: "related-articles" }),
+    client.fetch(RELATED_ARTICLES_BY_SLUG, { slug: "related-article" }),
   ]);
-
-  console.log("articleData:", articleData);
-  console.log("relatedArticles:", relatedArticles);
 
   if (!articleData) return notFound();
 
@@ -90,23 +87,26 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const markdown = markdownit();
   const parsedMarkdown = markdown.render(post) || "";
+
   return (
     <>
-      <section className="section_container bg-slate-500 !min-h-[230px]   ">
-        <p className="tag flex items-center justify-center">
+      <section className="section_container    !min-h-[230px]     ">
+        <p className="tag flex items-center justify-center text-gradient dark:text-gradient-dark dark:border-[#666] ">
           {formatDate(_createdAt)}
         </p>
         <div className="flex flex-col justify-center items-center  max-w-7xl ">
-          <h1 className="heading overflow-hidden">{title}</h1>
-          <p className="sub-heading !max-w-4xl">{description}</p>
+          <h1 className="heading text-gradient dark:text-gradient-dark overflow-hidden  font-bold">{title}</h1>
+          <p className="sub-heading text-gradient dark:text-gradient-dark !max-w-4xl  border border-[#00000014] dark:border-none  rounded-sm ">
+            {description}
+          </p>
         </div>
       </section>
 
-      <section className="sub-section_container ">
+      <section className="sub-section_container">
         <img
           src={image}
           alt="articleImage"
-          className="w-full h-auto rounded-xl"
+          className="w-full h-auto rounded-xl dark:border dark:border-[#ffffff24]"
         />
 
         <div className="space-y-5  mt-10 max-w-4xl mx-auto">
@@ -118,24 +118,26 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
               <Image
                 src={authorImage}
                 alt="avatarImage"
-                width={64}
-                height={64}
-                className="rounded-full drop-shadow-lg "
+                width={32}
+                height={32}
+                className="rounded-full drop-shadow-lg  "
               />
               <div>
-                <p className="font-medium text-[20px] text-black ">
+                <p className="font-medium text-[14px] sm:text-[20px] lg:text-[25px] text-black dark:text-[#999]  ">
                   {authorName}
                 </p>
-                <p>@{authorUsername}</p>
-                <p className="text-sm"> {authorBio}</p>
+                <p className="text-xs sm:text-sm lg:text-base">@{authorUsername}</p>
+                <p className="text-xs sm:text-sm lg:text-base"> {authorBio}</p>
               </div>
             </Link>
             <p className="category-tag">{category}</p>
           </div>
-          <h3 className="text-[30px] font-bold text-black">Article Details </h3>
+          <h3 className=" text-[20px] sm:text-[25px] lg:text-[30px] font-bold text-black dark:text-[#999]">
+            Article Details{" "}
+          </h3>
           {parsedMarkdown && (
             <article
-              className="max-w-4xl  break-all "
+              className="max-w-4xl text-xs sm:text-sm lg:text-base " // CSS: break-all is an option.
               dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
             />
           )}
@@ -155,8 +157,8 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         )}
 
-        {/* dynamic section */}
-        <Suspense fallback={<Skeleton className="view_skeleton" />}>
+        {/* Dynamic section */}
+        <Suspense fallback={<Skeleton className="view_skeleton " />}>
           <View id={_id} />
         </Suspense>
       </section>

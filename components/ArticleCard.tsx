@@ -17,23 +17,23 @@ export const ArticleCard = ({ post }: { post: ArticleCardType }) => {
     title,
   } = post;
   return (
-    <li className="article-card group">
+    <li className="article-card group ">
       <div className="flex-between">
         <div className="flex flex-col">
-          <p className="font-semibold">{formatDate(_createdAt)}</p>
+          <p className="font-semibold dark:text-[#eaeaea]">{formatDate(_createdAt)}</p>
           <Link href={`/user/${authorId}`}>
             <p className=" line-clamp-1  font-light "> {name}</p>
           </Link>
         </div>
         <div className="flex gap-1.5 ">
           <Eye />
-          <span className="">{views}</span>
+          <span>{views}</span>
         </div>
       </div>
 
-      <div className="flex-between mt-5 gap-5 ">
+      <div className="flex-between mt-5 gap-5  min-h-[50px]">
         <Link href={`/article/${_id}`}>
-          <h3 className="font-semibold">{title}</h3>
+          <h3 className="font-semibold dark:text-[#eaeaea]">{title}</h3>
         </Link>
 
         <Link href={`/user/${authorId}`}>
@@ -56,7 +56,10 @@ export const ArticleCard = ({ post }: { post: ArticleCardType }) => {
         <Link href={`/?query=${category.toLowerCase()}`}>
           <p className="font-semibold">{category}</p>
         </Link>
-        <Button asChild className="">
+        <Button
+          asChild
+          className="button-dark hover:bg-[hsl(0, 0%, 9%)] dark:bg-custom-light dark:opacity-70 dark:hover:opacity-60 "
+        >
           <Link href={`/article/${_id}`}>Details</Link>
         </Button>
       </div>

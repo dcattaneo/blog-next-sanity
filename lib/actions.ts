@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@/auth";
+import { auth, signOut, signIn } from "@/auth";
 import { parseServerActionResponse } from "./utils";
 import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
@@ -58,4 +58,13 @@ export async function createArticle(
       status: "ERROR",
     });
   }
+}
+
+export async function handleSignOut() {
+  await signOut({ redirectTo: "/" });
+}
+
+// Define the sign-in action
+export async function handleSignIn() {
+  await signIn("github");
 }

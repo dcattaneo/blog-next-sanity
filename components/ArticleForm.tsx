@@ -13,17 +13,24 @@ import { createArticle } from "@/lib/actions";
 import debounce from "lodash.debounce";
 import { LoaderCircle } from "lucide-react";
 
+type SubmitState = {
+  error: string;
+  status: "INITIAL" | "SUCCESS" | "ERROR";
+};
+
 export const ArticleForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isLoadingImage, setIsLoadingImage] = useState(false);
-  const [imageError, setImageError] = useState(true);
-  const [content, setContent] = useState("");
+  const [isLoadingImage, setIsLoadingImage] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<boolean>(true);
+  const [content, setContent] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+
   const { toast } = useToast();
   const router = useRouter();
-  console.log("imageLoading:", isLoadingImage);
-  console.log("imageError:", imageError);
 
-  const handleSubmit = async (prevState: any, formData: FormData) => {
+  const handleSubmit = async (prevState: SubmitState, formData: FormData) => {
     try {
       const formValues = {
         title: formData.get("title") as string,
@@ -99,6 +106,13 @@ export const ArticleForm = () => {
     status: "INITIAL",
   });
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitle(e.target.value);
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setDescription(e.target.value);
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setCategory(e.target.value);
+
   return (
     <form action={formAction} className="article-form">
       <div>
@@ -110,6 +124,8 @@ export const ArticleForm = () => {
           name="title"
           className="article-form_input"
           required
+          value={title}
+          onChange={handleTitleChange}
           placeholder="Article title"
         />
 
@@ -125,6 +141,8 @@ export const ArticleForm = () => {
           name="description"
           className="article-form_textarea"
           required
+          value={description}
+          onChange={handleDescriptionChange}
           placeholder="Article description"
         />
 
@@ -142,6 +160,8 @@ export const ArticleForm = () => {
           name="category"
           className="article-form_input"
           required
+          value={category}
+          onChange={handleCategoryChange}
           placeholder="Article category"
         />
 
@@ -152,26 +172,26 @@ export const ArticleForm = () => {
 
       <div>
         <label htmlFor="link" className="article-form_label">
-          image URL
+          Image URL
         </label>
-        <div className="relative ">
+        <div className="relative">
           <Input
             onChange={(e) => handleImageUrlChange(e.target.value)}
             id="link"
             name="link"
-            className="article-form_input pr-10 "
+            className="article-form_input pr-10  "
             placeholder="Article Image URL"
           />
 
           {isLoadingImage ? (
-            <LoaderCircle className="absolute right-2 top-1/3   animate-spin" />
+            <LoaderCircle className="absolute right-2 top-1/3   animate-spin dark:text-[#eaeaea]" />
           ) : (
             ""
           )}
         </div>
 
         <p
-          className={`${imageError ? "article-form_error" : "article-form_no_error"}`}
+          className={`${imageError ? "article-form_error" : "article-form_no_error dark:text-gradient-dark"}`}
         >
           {imageError
             ? "The URL does not point to a valid image."
@@ -182,30 +202,63 @@ export const ArticleForm = () => {
       </div>
 
       <div>
-        <label htmlFor="content" className="article-form_label">
+        <label htmlFor="content" className="article-form_label ">
           Content
         </label>
+        <div className="mt-3">
+          <MDEditor
+            value={content}
+            onChange={(value) => setContent(value || "")}
+            id="content"
+            preview="edit"
+            height={300}
+            textareaProps={{
+              placeholder: "Share your knowledge with the community",
+              className: `dark:bg-black dark:text-[#e2e8f0]  text-[#1a202c]  !important `,
+            }}
+            previewOptions={{
+              className:
+                "dark:bg-black dark:text-[#e2e8f0]  text-[#1a202c] !important",
+            }}
+          />
 
-        <MDEditor
-          className="mt-3"
-          value={content}
-          onChange={(value) => setContent(value as string)}
-          id="content"
-          preview="live"
-          height={300}
-          style={{ borderRadius: 20, overflow: "hidden" }}
-          textareaProps={{
-            placeholder: "Share your knowledge with the community",
-          }}
-          previewOptions={{ disallowedElements: ["style"] }}
-        />
+          <style jsx global>
+            {`
+              .w-md-editor {
+                background-color: #ffffff; /* Light mode background */
+                color: #1a202c; /* Light mode text */
+              }
+
+              .dark .w-md-editor {
+                background-color: black; /* Dark mode background */
+                color: #e2e8f0; /* Dark mode text */
+              }
+
+              .w-md-editor-text-input {
+                color: #1a202c !important; /* Text color in light mode */
+              }
+
+              .dark .w-md-editor-text-input {
+                color: #e2e8f0 !important; /* Text color in dark mode */
+              }
+
+              .w-md-editor-preview {
+                background-color: transparent; /* Match parent background */
+                color: inherit; /* Match parent text color */
+              }
+            `}
+          </style>
+        </div>
 
         {errors.content && (
           <p className="article-form_error">{errors.content}</p>
         )}
       </div>
 
-      <Button className="article-form_btn rounded-2xl" disabled={isPending}>
+      <Button
+        className="article-form_btn bg-[#0a0a0a] hover:opacity-90 hover:bg-[#0a0a0a] dark:bg-[#eaeaea] dark:opacity-90 dark:hover:opacity-70 dark:text-[#080808] rounded-2xl   "
+        disabled={isPending}
+      >
         {isPending ? "Submitting" : "Create Article"}{" "}
       </Button>
     </form>

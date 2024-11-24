@@ -9,7 +9,7 @@ export const SearchForm = ({ query }: { query?: string }) => {
       <input
         name="query"
         defaultValue={query}
-        className="search-input"
+        className="search-input "
         placeholder="Search"
       />
 
