@@ -6,6 +6,8 @@ import { Button } from "./ui/button";
 import { ArticleCardType } from "./ArticlesList";
 
 export const ArticleCard = ({ post }: { post: ArticleCardType }) => {
+
+  
   const {
     _createdAt,
     views,
