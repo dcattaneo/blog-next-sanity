@@ -6,6 +6,7 @@ const CreateArticlePage = async () => {
   const session = await auth();
 
   if (!session) redirect("/");
+  
   return (
     <>
       <section className="section_container !min-h-[230px]  flex flex-col justify-center items-center">
