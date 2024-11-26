@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { ChevronDown, LogOut } from "lucide-react";
 import {
   DropdownMenu,
@@ -62,7 +61,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
                     className="rounded-full"
                   />
                   {/* Tooltip */}
-                  <span className="absolute left-1/2 -translate-x-1/2 mb-2 w-max px-2 py-1 bg-custom-dark dark:bg-gray-200 dark:text-black text-xs rounded opacity-0 group-hover:opacity-90 transition-opacity">
+                  <span className="absolute left-1/2 -translate-x-1/2 mb-2 w-max px-2 py-1 bg-custom-dark dark:bg-gray-200 dark:text-black text-xs rounded opacity-0 group-hover:opacity-90 ">
                     {session?.user?.name}
                   </span>
                 </Link>
@@ -99,20 +98,26 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
                 </Link>
 
                 <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <ChevronDown className="text-black opacity-85 dark:text-white w-4 h-4 " />
+                  <DropdownMenuTrigger asChild>
+                    <Button className="bg-transparent bg-custom-light  shadow-none  dark:bg-[#0a0a0a] dark:text-white dark:hover:bg-[#ffffff17] dark:bg-[#4e4c4c14] dark:border-[#ffffff24] text-transparent hover:bg-transparent hover:text-transparent">
+                      <ChevronDown className="text-black opacity-85 dark:text-white w-4 h-4 " />
+                    </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className=" dark:border-[#ffffff24] dark:bg-black ">
-                    <DropdownMenuItem className=" justify-center dark:text-[#eaeaea]  ">
-                      <Link href={`/user/${session?.id}`}>Profile</Link>
-                    </DropdownMenuItem>
+                  <DropdownMenuContent className=" dark:border-[#ffffff24] dark:bg-black">
+                    <Link href={`/user/${session?.id}`} className="bg-red-200">
+                      <DropdownMenuItem className=" justify-center dark:text-[#eaeaea]">
+                        Profile
+                      </DropdownMenuItem>
+                    </Link>
                     <DropdownMenuSeparator className=" dark:bg-[#ffffff24]" />
-                    <DropdownMenuItem className="justify-center dark:text-[#eaeaea]">
-                      <Link href="/article/create">
-                        <span>Create</span>
-                      </Link>
-                    </DropdownMenuItem>
+
+                    <Link href="/article/create">
+                      <DropdownMenuItem className="justify-center dark:text-[#eaeaea]">
+                        Create
+                      </DropdownMenuItem>
+                    </Link>
                     <DropdownMenuSeparator className=" dark:bg-[#ffffff24]" />
+
                     <DropdownMenuItem className="justify-center dark:text-[#eaeaea]">
                       {" "}
                       <form action={handleSignOut}>
@@ -128,7 +133,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
           ) : (
             <form action={handleSignIn}>
               <Button
-                className="bg-custom-dark dark:bg-custom-light opacity-90 hover:opacity-80 hover:bg-[hsl(0, 0%, 9%)] flex flex-row justify-center items-center text-xs sm:text-sm  p-2 gap-2 sm:p-4 "
+                className="bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] flex flex-row justify-center items-center text-xs sm:text-sm  p-2 gap-2 sm:p-4 "
                 type="submit"
               >
                 Sign In
