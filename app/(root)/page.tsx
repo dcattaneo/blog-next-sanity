@@ -10,7 +10,9 @@ export default async function Home({
   searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams)?.query;
+  console.log("current-query: ", query);
   const params = { search: query || null };
+  console.log("params:", params);
 
   // const session = await auth();
 
@@ -20,6 +22,8 @@ export default async function Home({
   // OPTION 2(current): --- FETCH DIRECTLY FROM SANITY, REVALIDATING THE PAGE WHENEVER NEW CHANGES ARE MADE ---
 
   const { data: posts } = await sanityFetch({ query: ARTICLES_QUERY, params });
+
+  console.log("posts from query:", posts);
 
   return (
     <>

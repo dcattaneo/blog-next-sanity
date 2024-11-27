@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 export const ARTICLES_QUERY =
-  defineQuery(`*[_type == "article" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search]  | order(_createdAt desc) {
+  defineQuery(`*[_type == "article" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search || description match $search] | order(_createdAt desc) {
   _id, 
     title,
     slug, 
@@ -76,10 +76,10 @@ export const ARTICLES_BY_AUTHOR_QUERY =
     image 
 }`);
 
-
 // In order to fetch => slug : "related-articles"
 
-export const RELATED_ARTICLES_BY_SLUG = defineQuery(`*[_type == "related" && slug.current == $slug ][0]{
+export const RELATED_ARTICLES_BY_SLUG =
+  defineQuery(`*[_type == "related" && slug.current == $slug ][0]{
   _id,
   title,
   slug,
