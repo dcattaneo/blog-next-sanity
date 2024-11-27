@@ -1,18 +1,24 @@
 import { defineQuery } from "next-sanity";
 
 export const ARTICLES_QUERY =
-  defineQuery(`*[_type == "article" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search || description match $search] | order(_createdAt desc) {
+  defineQuery(`*[_type == "article" && defined(slug.current) && 
+    (!defined($search) || 
+    title match $search || 
+    author->name match $search || 
+    description match $search || 
+    (category match $search && $search != category))] 
+    | order(_createdAt desc) {
   _id, 
-    title,
-    slug, 
-    _createdAt, 
-    category, 
-    author -> {
-      _id, name, image, bio
-    }, 
-    views, 
-    description, 
-    image 
+  title,
+  slug, 
+  _createdAt, 
+  category, 
+  author -> {
+    _id, name, image, bio
+  }, 
+  views, 
+  description, 
+  image 
 }`);
 
 export const ARTICLE_BY_ID_QUERY =
