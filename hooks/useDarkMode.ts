@@ -2,10 +2,8 @@
 import { useState, useEffect } from "react";
 
 export function useDarkMode() {
-  const [isLightMode, setIsLightMode] = useState(true); // Inicialización predeterminada
-
+  const [isLightMode, setIsLightMode] = useState(true);
   useEffect(() => {
-    // Leer el tema guardado de `localStorage` al montar el componente
     const savedMode = localStorage.getItem("theme");
     if (savedMode === "dark") {
       setIsLightMode(false);
@@ -15,7 +13,6 @@ export function useDarkMode() {
   }, []);
 
   useEffect(() => {
-    // Aplicar la clase correspondiente al tema
     if (isLightMode) {
       document.documentElement.classList.remove("dark");
     } else {
