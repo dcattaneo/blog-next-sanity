@@ -5,11 +5,10 @@ import { HiOutlineMail } from "react-icons/hi";
 import { LuGithub } from "react-icons/lu";
 import { RiLinkedinLine } from "react-icons/ri";
 import { MdOutlineFileDownload } from "react-icons/md";
-import { useDarkModeContext } from "@/app/context/DarkModeContext";
+import { useThemeToggle } from "@/hooks/useThemeToggle";
 
 export const Footer = () => {
-  const { isLightMode, toggleToLightMode, toggleToDarkMode } =
-    useDarkModeContext();
+  const { isLightMode, toggleToLightMode, toggleToDarkMode } = useThemeToggle();
 
   return (
     <div className=" w-full px-5 py-1   mx-auto text-[14px]  border-t-[1px] border-[#00000014] dark:border-[#ffffff24] ">
@@ -71,7 +70,7 @@ export const Footer = () => {
         </div>
 
         <div
-          className={`border rounded-full flex justify-center items-center ${isLightMode ? "border-[#00000014]" : "border-wrapper-dark"}`}
+          className={`border rounded-full flex justify-center items-center  border-[#00000014]  dark:border-wrapper-dark`}
         >
           <div className="flex  p-1 gap-1">
             <div
