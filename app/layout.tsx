@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "easymde/dist/easymde.min.css";
 import { Toaster } from "@/components/ui/toaster";
-import { DarkModeProvider } from "./context/DarkModeContext";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "Blog-Next-Sanity",
@@ -15,12 +15,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={` antialiased bg-[rgb(250,250,250)] dark:bg-black`}>
-        <DarkModeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`antialiased bg-[rgb(250,250,250)] dark:bg-black"`}
+        suppressHydrationWarning
+      >
+        <ThemeProvider>
           {children}
           <Toaster />
-        </DarkModeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
