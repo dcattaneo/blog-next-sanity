@@ -15,6 +15,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
   );
 };
 
+// To avoid Hydration Mismatch
 const ThemeHydration = ({ children }: { children: ReactNode }) => {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
