@@ -95,7 +95,9 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           {formatDate(_createdAt)}
         </p>
         <div className="flex flex-col justify-center items-center  max-w-7xl ">
-          <h1 className="heading text-gradient dark:text-gradient-dark overflow-hidden  font-bold">{title}</h1>
+          <h1 className="heading text-gradient dark:text-gradient-dark overflow-hidden  font-bold">
+            {title}
+          </h1>
           <p className="sub-heading text-gradient dark:text-gradient-dark !max-w-4xl  border border-[#00000014] dark:border-none  rounded-sm ">
             {description}
           </p>
@@ -126,7 +128,9 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <p className="font-medium text-[14px] sm:text-[20px] lg:text-[25px] text-black dark:text-[#999]  ">
                   {authorName}
                 </p>
-                <p className="text-xs sm:text-sm lg:text-base">@{authorUsername}</p>
+                <p className="text-xs sm:text-sm lg:text-base">
+                  @{authorUsername}
+                </p>
                 <p className="text-xs sm:text-sm lg:text-base"> {authorBio}</p>
               </div>
             </Link>
