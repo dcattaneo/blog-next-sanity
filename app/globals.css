@@ -193,6 +193,33 @@
   .article-form_btn {
     @apply transition duration-100 p-5 min-h-[60px] w-full font-bold text-[16px] md:text-[18px] !important;
   }
+
+  .article-styles h1 .article-styles h2,
+  .article-styles h3 {
+    @apply font-bold  my-4;
+  }
+
+  .article-styles p {
+    @apply my-2 leading-relaxed;
+  }
+
+  .article-styles ul {
+    @apply my-4 pl-6;
+  }
+
+  .article-styles a {
+    @apply text-blue-500 underline;
+  }
+
+  .article-styles code {
+    @apply px-1 py-0.5 rounded font-mono  whitespace-pre-wrap break-words;
+  }
+
+  .article-styles pre {
+    @apply bg-gray-100 p-4 rounded dark:bg-[#111] dark:text-white  dark:text-opacity-85;
+    white-space: pre-wrap; /* Ensure long code lines wrap */
+    overflow-x: auto; /* Adds horizontal scroll if necessary */
+  }
 }
 
 body {

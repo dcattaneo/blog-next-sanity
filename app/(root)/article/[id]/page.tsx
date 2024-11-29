@@ -141,7 +141,7 @@ const ArticlePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </h3>
           {parsedMarkdown && (
             <article
-              className="max-w-4xl text-xs sm:text-sm lg:text-base " // CSS: break-all is an option.
+              className="article-styles  max-w-4xl text-xs sm:text-sm lg:text-base" // CSS: break-all is an option.
               dangerouslySetInnerHTML={{ __html: parsedMarkdown }}
             />
           )}
