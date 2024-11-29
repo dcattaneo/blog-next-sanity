@@ -22,7 +22,7 @@ This is a **Blog App** built with **Next.js 15**, **Sanity CMS**, and **TypeScri
 - Uses static shells with placeholders for dynamic content wrapped in `<Suspense>` tags.
 - **Examples:**
   - **Articles:** Static details with dynamic view counters.
-  - **User Profile Card:** Cached user cards with fresh, dynamically loaded content.
+  - **User Profile Card:** The user profile card is cached but the content (user articles) is always generated fresh. This ensures that the latest data is desplayed without caching using the PPR approach.
 
 ### **4. Routing**
 
