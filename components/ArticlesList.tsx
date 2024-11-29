@@ -22,7 +22,7 @@ export const ArticlesList = ({
   return (
     <>
       <section className="section_container ">
-        <p className="font-bold text-3xl text-gradient dark:text-gradient-dark ">
+        <p className="font-bold text-3xl text-gradient dark:text-gradient-dark  pb-4">
           {query ? `Search result for: ${query}` : "All Articles"}
         </p>
 
