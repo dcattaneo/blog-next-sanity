@@ -133,7 +133,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
           ) : (
             <form action={handleSignIn}>
               <Button
-                className="h-10 px-4 py-2 bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] flex flex-row justify-center items-center text-xs sm:text-sm  p-2 gap-2 sm:p-4 "
+                className="sm:h-10 sm:px-4 sm:py-2 bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] flex flex-row justify-center items-center text-xs sm:text-sm  p-2 gap-2 sm:p-4 "
                 type="submit"
               >
                 Sign In
