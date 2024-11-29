@@ -34,7 +34,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
       <nav className="flex justify-between items-center">
         <Link href="/">
           <svg
-            className="w-6 h-6 lg:w-7 lg:h-7 text-[#0a0a0a] opacity-85 dark:text-[#eaeaea] dark:opacity-90"
+            className="w-7 h-7 lg:w-8 lg:h-8 text-[#0a0a0a] opacity-85 dark:text-[#eaeaea] dark:opacity-90"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             fill="currentColor"
@@ -56,8 +56,8 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
                   <Image
                     src={session?.user.image || "https://i.pravatar.cc/300"}
                     alt={session?.user.name || ""}
-                    width={30}
-                    height={30}
+                    width={40}
+                    height={40}
                     className="rounded-full"
                   />
                   {/* Tooltip */}
@@ -70,7 +70,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
                 href="/article/create"
                 className="hidden md:flex rounded-lg"
               >
-                <Button className="bg-custom-light  shadow-none hover:bg-[#00000014] dark:bg-[#0a0a0a] dark:text-white dark:hover:bg-[#ffffff17] dark:bg-[#4e4c4c14] dark:border-[#ffffff24] ">
+                <Button className="h-10 px-4 py-2 bg-custom-light  shadow-none hover:bg-[#00000014] dark:bg-[#0a0a0a] dark:text-white dark:hover:bg-[#ffffff17] dark:bg-[#4e4c4c14] dark:border-[#ffffff24] ">
                   Create
                 </Button>
               </Link>
@@ -78,7 +78,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
               <form className="hidden md:flex" action={handleSignOut}>
                 <Button
                   type="submit"
-                  className="bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] "
+                  className="h-10 px-4 py-2 bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] "
                 >
                   <LogOut style={{ width: "15px", height: "15px" }} />
                   Sign out
@@ -133,7 +133,7 @@ export const ClientNavbar: React.FC<ClientNavbarProps> = ({
           ) : (
             <form action={handleSignIn}>
               <Button
-                className="bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] flex flex-row justify-center items-center text-xs sm:text-sm  p-2 gap-2 sm:p-4 "
+                className="h-10 px-4 py-2 bg-custom-dark dark:bg-custom-light  hover:opacity-85 hover:bg-[hsl(0, 0%, 9%)] flex flex-row justify-center items-center text-xs sm:text-sm  p-2 gap-2 sm:p-4 "
                 type="submit"
               >
                 Sign In
