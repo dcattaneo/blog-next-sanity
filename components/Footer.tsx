@@ -57,14 +57,14 @@ export const Footer = () => {
             </li>
 
             <li className=" flex items-center">
-              <Link
+              <a
                 href="/CV_Cattaneo_Diego.pdf"
                 download="CV_Cattaneo_Diego.pdf"
                 target="_blank"
                 className="flex items-center "
               >
                 <MdOutlineFileDownload className="w-4 h-4  lg:w-5 lg:h-5" />
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
