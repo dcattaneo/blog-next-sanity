@@ -213,7 +213,7 @@ export const ArticleForm = () => {
             preview="edit"
             height={300}
             textareaProps={{
-              placeholder: "Share your knowledge with the community",
+              placeholder: "Share your knowledge",
               className: `dark:bg-black dark:text-[#e2e8f0]  text-[#1a202c]  !important `,
             }}
             previewOptions={{
