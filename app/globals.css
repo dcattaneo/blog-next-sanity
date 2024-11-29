@@ -216,9 +216,11 @@
   }
 
   .article-styles pre {
-    @apply bg-gray-100 p-4 rounded dark:bg-[#111] dark:text-white  dark:text-opacity-85;
-    white-space: pre-wrap; /* Ensure long code lines wrap */
-    overflow-x: auto; /* Adds horizontal scroll if necessary */
+    @apply bg-gray-100 p-4 rounded whitespace-pre-wrap overflow-x-auto dark:bg-[#111] dark:text-white  dark:text-opacity-85;
+  }
+
+  .article-styles img {
+    @apply rounded-lg shadow-md mx-auto my-4 max-w-full h-auto block;
   }
 }
 
